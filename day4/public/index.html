@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+          const mymap = L.map('issMap').setView([0, 0], 1);
+        const attribution =
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+        const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        const tiles = L.tileLayer(tileUrl, {
+            attribution
+        });
+        tiles.addTo(mymap);
+
+
+
+
+
+
+        if ('geolocation' in navigator) {
+            console.log('geolocation available');
+            navigator.geolocation.getCurrentPosition(position => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                 console.log(position);
+                document.getElementById('latitude').textContent = lat;
+                document.getElementById('longitude').textContent = lon;
+               // console.log(position);
+            });
+        } else {
+            console.log('geolocation not available');
+        }
+    </script>
+    <h1>Data Selfie App</h1>
+
+    <p>
+        latitude: <span id="latitude"></span>&deg;<br />
+        longitude:  <span id="longitude">&deg;</span>
+    </p>
+</body>
+
+</html>
